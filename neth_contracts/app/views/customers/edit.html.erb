@@ -1,0 +1,55 @@
+<%= link_to 'View Customer', @customer %> |
+<%= link_to 'Manage Customers', customers_path %>
+<hr />
+
+<h1>Edit Customer</h1>
+<span style="font-size: x-small; color: gray;">Enter customer information exactly how it should appear in printed contract.</span><br />
+
+<% form_for(@customer) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :first_name, "First Name:" %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name, "Last Name:" %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :phone_primary, "Primary Phone:"%><br />
+    <%= f.text_field :phone_primary %>
+  </p>
+  <p>
+    <%= f.label :phone_alt, "Alt. Phone:" %><br />
+    <%= f.text_field :phone_alt %>
+  </p>
+  <p>
+    <%= f.label :street_1, "Street 1:" %><br />
+    <%= f.text_field :street_1 %>
+  </p>
+  <p>
+    <%= f.label :street_2, "Street 2:" %><br />
+    <%= f.text_field :street_2 %>
+  </p>
+  <p>
+    <%= f.label :city, "City:" %><br />
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :state, "State:" %><br />
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.label :zip, "Zip:"%><br />
+    <%= f.text_field :zip %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<br />
+<hr />
+<%= link_to 'View Customer', @customer %> |
+<%= link_to 'Manage Customers', customers_path %>

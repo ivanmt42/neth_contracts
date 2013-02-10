@@ -1,0 +1,53 @@
+<%= link_to 'View Customer', customer_path(@customer) %>
+<hr />
+
+<h1>Enter New Appointment</h1>
+
+<% form_for([@customer, @appointment]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :datetime, "Date and Time:" %><br />
+    <%= f.text_field :datetime %>
+  </p>
+  <p>
+    <%= f.label :estimator, "Estimator:" %><br />
+    <%= f.text_field :estimator %>
+  </p>
+  <p>
+    <%= f.label :job_class, "Type of Appointment:" %><br />
+    <%= f.select :job_class,
+		[["Residential", "Residential"],
+		["Commercial", "Commercial"]] %>
+  </p>
+   <p>
+    <%= f.label :job_type, "Type of Estimate:" %><br />
+    <%= f.text_field :job_type %>
+  </p>  
+  <p>
+    <%= f.label :referral, "How did you hear about us?" %><br />
+	<span style="font-size: x-small; color: gray;">
+		If selecting "Referred by", please enter an optional name in the text field for that option.<br />
+	</span>
+	<% referral_options = ["Talking Phone Book", "Nynex Phone Book", "Internet", "Trucks", "Lawn Sign", "Bulletin", "Referred by"] %>
+	<% referral_options.each do |ref| %>
+		<% if ref != "Referred by" %>
+			<%= radio_button_tag "appointment[referral]", ref %> <%= ref %><br />
+		<% elsif ref == "Referred by" %>
+			<%= radio_button_tag "appointment[referral]", ref %> <%= ref %> <%= f.text_field :referral_option %><br />
+		<% end %>
+	<% end %>
+  </p>
+  <p>
+    <%= f.label :message, "Message:" %><br />
+    <%= f.text_field :message, :size => 100 %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<br />
+<hr />
+
+<%= link_to 'View Customer', customer_path(@customer) %>

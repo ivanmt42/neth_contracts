@@ -1,0 +1,113 @@
+<script type="text/javascript">
+function toggleAll(name)
+{
+  boxes = document.getElementsByClassName(name);
+  for (i = 0; i < boxes.length; i++)
+    if (!boxes[i].disabled)
+   		{	boxes[i].checked = !boxes[i].checked ; }
+}
+
+function setAll(name,state)
+{
+  boxes = document.getElementsByClassName(name);
+  for (i = 0; i < boxes.length; i++)
+    if (!boxes[i].disabled)
+   		{	boxes[i].checked = state ; }
+}
+</script>
+
+<%= link_to 'Back to Contract', contract_path(@contract) %>
+<hr />
+
+<h1>Edit Contract Information</h1>
+
+<% form_for @contract, :html => {:name => 'edit_contract'} do |contract_form| %>
+  <%= contract_form.error_messages %>
+  <p>
+    <%= contract_form.label :job_type_id, "Job Type:" %><br />
+	<%= contract_form.collection_select(:job_type_id, JobType.all, :id, :label) %>
+  </p>
+  <p>
+    <%= contract_form.label :start_date, "Start Date:" %><br />
+    <%= contract_form.date_select( :start_date, :order => [:month, :day, :year], :include_blank => true ) %>
+  </p>
+  <p>
+    <%= contract_form.label :completion_date, "Completion Date:" %><br />
+    <%= contract_form.date_select( :completion_date, :order => [:month, :day, :year], :include_blank => true ) %>
+  </p>
+  <p>
+    <%= contract_form.label :is_essence, "Time is of the Essence:" %><br />
+    <%= contract_form.select :is_essence,
+		[["NO", false],
+		["YES", true]] %>
+  </p>
+  <p>
+    <%= contract_form.label :total_cost, "Total Cost:" %><br />
+	<span style="font-size: x-small; color: gray;">(Enter exactly how Total Cost should appear in printed contract. ex: $1000.00)</span><br />
+    <%= contract_form.text_field :total_cost %>
+  </p>
+  <p>
+    <%= contract_form.label :down_payment, "Down Payment:" %><br />
+	<span style="font-size: x-small; color: gray;">(Enter exactly how Down Payment should appear in printed contract. ex: 1/3 of Total)</span><br />
+    <%= contract_form.text_field :down_payment %>
+  </p>
+  <p>
+    <%= contract_form.submit "Update Contract" %>
+  </p>
+
+<br />
+<hr />
+
+<h2>Select Contract Details</h2>
+
+<span style="font-size: x-small; color: gray;">
+	To add an optional value in a contract detail with "()", first add the detail to the contract.<br />
+	Come back to the edit contract page and there will be a text field next to the detail.<br />
+	Enter any value in the text field, click Update Contract Details, and the value will be place between the parenthesis. <br />
+</span>
+
+<p>
+	<%= link_to_function('Check All' , "setAll('select','checked');return false;") %>
+</p>
+
+<p>
+<% for acd in @available_contract_details %>
+	<span style="line-height: 185%;">
+		<% if acd.optional == false %>
+			<%= check_box_tag "contract[job_type_detail_ids][]", acd.id, @contract.job_type_details.include?(acd), :class=>'select' %>
+			<%= swap_detail_option(acd) %>
+			<% if acd.detail.match(/\(\)/) %>
+				<% @contract_details.each do |cd| %>
+						<% if cd.job_type_detail_id == acd.id %>
+							<% contract_form.fields_for :contract_details, cd do |f| %>
+								<%= f.text_field :detail_option %>
+							<% end %>
+						<% end %>
+				<% end %>	
+			<% end %>
+		<% elsif acd.optional == true %>
+			<%= check_box_tag "contract[job_type_detail_ids][]", acd.id, @contract.job_type_details.include?(acd), :class=>'select_optional' %>
+			<%= swap_detail_option(acd) %>
+			<% if acd.detail.match(/\(\)/) %>
+				<% @contract_details.each do |cd| %>
+						<% if cd.job_type_detail_id == acd.id %>
+							<% contract_form.fields_for :contract_details, cd do |f| %>
+								<%= f.text_field :detail_option %>
+							<% end %>
+						<% end %>
+				<% end %>	
+			<% end %>
+		<% end%>
+	</span>
+	<br />
+<% end %>
+</p>
+
+<p><%= contract_form.submit "Update Contract Details" %></p>
+
+<% end %>
+
+<br />
+<hr />
+
+<%= link_to 'Back to Contract', contract_path(@contract) %>

@@ -1,0 +1,43 @@
+<%= link_to 'View Customer', customer_path(@customer) %> |
+<%= link_to 'Add New Appointment', new_customer_appointment_path(@customer) %>
+<hr />
+
+<h1>Appointments for: <%= customer_full_name(@customer) %></h1>
+<% if !@customer.appointments.empty? %>
+	<% @customer.appointments.each do |appt| %>
+		<p>
+			<b>Estimator:</b>
+			<%=h appt.estimator %>
+			<br />
+			<b>Type of Appointment:</b>
+			<%=h appt.job_type %>
+			<br />
+			<b>Type of Estimate:</b>
+			<%=h appt.job_class %>
+			<br />
+			<b>Date and Time:</b>
+			<%=h appt.datetime %>
+			<br />
+			<b>How did you hear about us?</b>
+			<%=h display_referred_by(appt) %>
+			<br />
+			<b>Message:</b>
+			<%=h appt.message %>
+		</p>
+		<%= link_to 'Edit Appointment', edit_appointment_path(appt) %> | 
+		<%= link_to 'Print Appointment', appointment_path(appt, :pdf) %> | 
+		<%= link_to 'Delete Appointment', appt, :confirm => 'Are you sure you want to delete this appointment?', :method => :delete %>
+		<br />
+		<hr />	
+	<% end %>
+<% elsif @customer.appointments.empty? %>
+	<p>
+		<strong>No appointments currently assigned to customer.</strong><br />
+		<strong>You can add appointments here: <%= link_to 'Add New Appointment', new_customer_appointment_path(@customer) %></strong>
+	</p>
+	<br />
+	<hr />
+<% end %>
+
+<%= link_to 'View Customer', customer_path(@customer) %> |
+<%= link_to 'Add New Appointment', new_customer_appointment_path(@customer) %>

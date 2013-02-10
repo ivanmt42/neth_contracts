@@ -1,0 +1,29 @@
+<%= link_to 'View Job Type', job_type_path(@job_type) %>
+<hr />
+
+<h1>Edit Job Detail for: <%= get_job_name(@job_type) %></h1>
+<span style="font-size: x-small; color: gray;">
+	Enter Job Detail exactly how it should appear in printed contract.<br />
+	If an optional value is needed in the detail, enter "()" without any space between parenthesis. ex: Install () roof breathers.<br />
+	You will be allowed to add any text between the parentheses when assigning details to a contract.
+</span>
+<br />
+
+<% form_for([@job_type, @job_type_detail]) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :detail, "Detail:" %><br />
+    <%= f.text_field :detail, :size => 100 %>
+  </p>
+  <p>
+    <%= f.label :optional, "Check if optional:" %><br />
+    <%= f.check_box :optional %>
+  </p>  
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<br />
+<hr />
+<%= link_to 'View Job Type', job_type_path(@job_type) %>

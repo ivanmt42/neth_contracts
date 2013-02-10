@@ -1,0 +1,35 @@
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Manage Job Types', job_types_path %>
+<hr />
+
+<h1>Job Name: <%=h @job_type.label %></h1>
+
+<%= link_to 'Edit Job Name', edit_job_type_path(@job_type) %>
+
+<br />
+<hr />
+
+<h2>Job Details</h2>
+
+<%= link_to 'Add New Job Detail', new_job_type_job_type_detail_path(@job_type) %><br />
+<br />
+
+<% @job_type.job_type_detail.each do |detail| %>
+<span style="line-height: 185%;">
+	<%= link_to 'Edit',
+		edit_job_type_job_type_detail_path(@job_type, detail) %> |		
+	<%= link_to 'Delete',
+		job_type_job_type_detail_path(@job_type, detail),
+		:confirm => 'Are you sure you want to delete this job detail?',
+		:method => :delete %>
+	<%=h detail.detail %>
+</span>
+<br />
+<% end %>
+
+<br />
+<hr />
+
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Manage Job Types', job_types_path %>
+

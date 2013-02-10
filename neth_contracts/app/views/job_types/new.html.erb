@@ -1,0 +1,20 @@
+<%= link_to 'Manage Job Types', job_types_path %>
+<hr />
+
+<h1>Add New Job Type</h1>
+<span style="font-size: x-small; color: gray;">(Enter Job Name exactly how it should appear in printed contract. ex: ROOFING)</span><br />
+
+<% form_for(@job_type) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :label, "Job Name: " %><%= f.text_field :label %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<br />
+<hr />
+<%= link_to 'Manage Job Types', job_types_path %>

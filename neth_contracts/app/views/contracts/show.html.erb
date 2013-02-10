@@ -1,0 +1,78 @@
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Back to Customer', customer_path(@contract.customer_id) %> | 
+<%= link_to 'Customers Main Menu', customers_path %>
+<hr />
+
+<h1>Contract</h1>
+<% @contract = Contract.find(params[:id]) %>
+
+<p>
+  <b>Job Type:</b>
+  <%=h get_job_label(@contract) %>
+<br />
+  <b>Start Date:</b>
+  <% if @contract.start_date %>
+	<%=h @contract.start_date.strftime('%B %d, %Y') %>
+  <% end %>
+<br />
+  <b>Completion Date:</b>
+  <% if @contract.completion_date %>
+	<%=h @contract.completion_date.strftime('%B %d, %Y') %>
+  <% end %>
+<br />
+  <b>Time is of the Essence:</b>
+  <%=h is_essence_label(@contract) %>
+<br />
+  <b>Total Cost:</b>
+  <%=h @contract.total_cost %>
+<br />
+  <b>Down Payment:</b>
+  <%=h @contract.down_payment %>
+</p>
+
+<%= link_to 'Print Contract',
+	contract_path(@contract, :pdf) %> | 
+
+<%= link_to 'Edit Contract and Details',
+	edit_contract_path(@contract) %> |
+	
+<%= link_to 'Delete Contract',
+	contract_path(@contract),
+	:confirm => 'Are you sure you want to delete this contract?',
+	:method => :delete %>
+
+<br />
+<hr />
+
+<h2>Contract Details</h2>
+<span style="font-size: x-small; color: gray;">
+	* Click and drag a detail below to rearrange its order in the list.<br />
+	* Changes are saved automatically and will be reflected in the printed PDF contract.<br />
+	* To add an optional value in a contract detail with "()", click 'Edit Contract and Details' link above.
+</span>
+<br />
+
+<% if !@contract_details.empty? %>
+	<ul id="details">
+		<% @contract_details.each do |cd| %>
+			<% for jd in @job_type_details %>
+				<% if jd.id == cd.job_type_detail_id %>
+					<% content_tag_for(:li, cd) do %>
+						<%= swap_detail_option(jd) %>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+	</ul>
+<% elsif @contract_details.empty? %>
+	<p>
+		<strong>No contract details currently assigned to contract.</strong><br />
+		<strong>You can add details here: <%= link_to 'Edit Contract and Details', edit_contract_path(@contract) %></strong>
+	</p>
+<% end %>
+<%= sortable_element( "details", :url => { :action => "sort" } ) %>
+
+<hr />
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Back to Customer', customer_path(@contract.customer_id) %> | 
+<%= link_to 'Customers Main Menu', customers_path %>

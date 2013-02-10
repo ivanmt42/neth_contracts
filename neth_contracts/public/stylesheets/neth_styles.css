@@ -1,0 +1,133 @@
+.header{
+	font-size: 18px;
+	background-color: #fff;
+	padding: 2%;
+	float: left;
+}
+
+.header_links{
+	font-size: 12px;
+	padding: 3%;
+}
+
+.header_title{
+	font-size: 26px;
+}
+
+.index_logo{
+	padding-right: 6%;
+	float: left;
+}
+
+.print_header{
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.print_highlight{
+	background-color: #ccc;
+	border: solid black 1px;
+	padding: 2px;
+}
+
+.print_warranty{
+	background-color: #fff;
+	border: solid black 1px;
+	padding: 4px;
+}
+
+.underline{
+	text-decoration: underline;
+}
+
+.contract_detail{
+	cursor: move;
+	padding-bottom: 2px;
+}
+
+body {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-left: 5%;
+	margin-right: 5%;
+	background-color: #6092cd;
+	color: #333;
+	font: normal 100% verdana, arial, helvetica, sans-serif;
+	font-size:   13px;
+	line-height: 18px;
+}
+
+.body_inner {
+	padding: 2%;
+	background-color: #fff;
+}
+
+table, th, tr, td{
+	border: solid gray 1px;
+	border-collapse: collapse;
+	border-spacing: 0px;
+	padding: 4px;
+	
+}
+
+h1{
+	font-size: 20px;
+}
+
+h2{
+	font-size: 16px;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #666; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#6092cd; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+

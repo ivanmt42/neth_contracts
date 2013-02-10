@@ -1,0 +1,53 @@
+<%= link_to 'View Appointments for Customer', customer_appointments_path(@appointment.customer_id) %>
+<hr />
+
+<h1>Edit Appointment</h1>
+
+<% form_for(@appointment) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :datetime, "Date and Time:" %><br />
+    <%= f.text_field :datetime %>
+  </p>
+  <p>
+    <%= f.label :estimator, "Estimator:" %><br />
+    <%= f.text_field :estimator %>
+  </p>
+  <p>
+    <%= f.label :job_class, "Type of Appointment:" %><br />
+    <%= f.select :job_class,
+		[["Residential", "Residential"],
+		["Commercial", "Commercial"]] %>
+  </p>
+   <p>
+    <%= f.label :job_type, "Type of Estimate:" %><br />
+    <%= f.text_field :job_type %>
+  </p>  
+  <p>
+    <%= f.label :referral, "How did you hear about us?" %><br />
+	<span style="font-size: x-small; color: gray;">
+		When selecting one of the prefilled options, delete any text in the optional text field if it was previously saved.<br />
+	</span>
+	<% referral_options = ["Talking Phone Book", "Nynex Phone Book", "Internet", "Trucks", "Lawn Sign", "Bulletin", "Referred by"] %>
+	<% referral_options.each do |ref| %>
+		<% if ref != "Referred by" %>
+			<%= radio_button_tag "appointment[referral]", ref, @appointment.referral.eql?(ref) %> <%= ref %><br />
+		<% elsif ref == "Referred by" %>
+			<%= radio_button_tag "appointment[referral]", ref, @appointment.referral.eql?(ref) %> <%= ref %> <%= f.text_field :referral_option %><br />
+		<% end %>
+	<% end %>
+  </p>
+  <p>
+    <%= f.label :message, "Message:" %><br />
+    <%= f.text_field :message, :size => 100 %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<br />
+<hr />
+
+<%= link_to 'View Appointments for Customer', customer_appointments_path(@appointment.customer_id) %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  contract_id: 1
+  job_type_detail_id: 1
+
+two:
+  contract_id: 1
+  job_type_detail_id: 1

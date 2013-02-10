@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  job_type: MyString
+  start_date: 2009-02-21
+  completion_date: 2009-02-21
+  is_essence: false
+  total_cost: MyString
+  down_payment: MyString
+  customer: 
+
+two:
+  job_type: MyString
+  start_date: 2009-02-21
+  completion_date: 2009-02-21
+  is_essence: false
+  total_cost: MyString
+  down_payment: MyString
+  customer: 

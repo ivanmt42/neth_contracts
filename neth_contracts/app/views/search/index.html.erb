@@ -1,0 +1,60 @@
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Manage Customers', customers_path %>
+<hr />
+
+<h1>Customer Search</h1>
+<span style="font-size: x-small; color: gray;">
+	Enter any part of customer's first or last name in the text field and click Search. Search is not case sensitive.
+</span>
+<br />
+<br />
+	
+<% form_tag(search_path, :method => 'get') do %>
+	Search for:
+	<%= text_field_tag :query, params[:query] %>
+	<%= submit_tag "Search", :name => nil %> | 
+	<%= link_to "Clear search results", "/search" %>
+<% end %>
+<br />
+
+<% if params[:query] and !@results.empty? %>
+	<table>
+		<tr>
+		    <th>First Name</th>
+		    <th>Last Name</th>
+		    <th>Primary Phone</th>
+		    <th>Alt. Phone</th>
+		    <th>Street 1</th>
+		    <th>Street 2</th>
+		    <th>City</th>
+		    <th>State</th>
+			<th>Zip</th>
+			<th>Option</th>
+		</tr>
+
+		<% for result in @results %>
+		<tr>
+			<td><%=h result.first_name %></td>
+			<td><%=h result.last_name %></td>
+			<td><%=h result.phone_primary %></td>
+			<td><%=h result.phone_alt %></td>
+			<td><%=h result.street_1 %></td>
+			<td><%=h result.street_2 %></td>
+			<td><%=h result.city %></td>
+			<td><%=h result.state %></td>
+			<td><%=h result.zip %></td>
+			<td><%= link_to 'View Customer', customer_path(result) %></td>
+		  </tr>
+		<% end %>
+	</table>
+<% elsif params[:query] and @results.empty? %>
+	<p style="color: red;">
+		No customers were found with a first name or last name containing: "<%= params[:query] %>"
+	</p>	
+<% end %>
+
+<br />
+<hr />
+
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Manage Customers', customers_path %>

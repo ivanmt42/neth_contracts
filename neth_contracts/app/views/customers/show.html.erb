@@ -1,0 +1,85 @@
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Manage Customers', customers_path %>
+<hr />
+
+<h1>Customer Information</h1>
+<p>
+  <b>First Name:</b>
+  <%=h @customer.first_name %>
+<br />
+  <b>Last Name:</b>
+  <%=h @customer.last_name %>
+<br />
+  <b>Primary Phone:</b>
+  <%=h @customer.phone_primary %>
+<br />
+  <b>Alt. Phone:</b>
+  <%=h @customer.phone_alt %>
+<br />
+  <b>Street 1:</b>
+  <%=h @customer.street_1 %>
+<br />
+  <b>Street 2:</b>
+  <%=h @customer.street_2 %>
+<br />
+  <b>City:</b>
+  <%=h @customer.city %>
+<br />
+  <b>State:</b>
+  <%=h @customer.state %>
+<br />
+  <b>Zip:</b>
+  <%=h @customer.zip %>
+</p>
+
+<%= link_to 'Edit Customer', edit_customer_path(@customer) %> | 
+<%= link_to 'Add New Appointment', new_customer_appointment_path(@customer) %> | 
+<%= link_to 'View Appointments', customer_appointments_path(@customer) %> | 
+<%= link_to 'Add New Contract for Customer', new_customer_contract_path(@customer) %>
+
+<br />
+<hr />
+
+<h2>Summary of Contracts for: <%= customer_full_name(@customer) %></h2>
+
+<% if !@customer.contracts.empty? %>
+	<% @customer.contracts.each do |contract| %>
+	
+		<p>
+		  <b>Job Type:</b>
+		  <%=h get_job_label(contract) %>
+		<br />
+		  <b>Start Date:</b>
+			  <% if contract.start_date %>
+				<%=h contract.start_date.strftime('%B %d, %Y') %>
+			  <% end %>
+		<br />
+		  <b>Completion Date:</b>
+			  <% if contract.completion_date %>
+				<%=h contract.completion_date.strftime('%B %d, %Y') %>
+			  <% end %>
+		<br />
+		  <b>Is Essence:</b>
+		  <%=h is_essence_label(contract) %>
+		<br />
+		  <b>Total Cost:</b>
+		  <%=h contract.total_cost %>
+		<br />
+		  <b>Down Payment:</b>
+		  <%=h contract.down_payment %>
+		</p>
+		<%= link_to 'Select Contract', contract_path(contract) %>
+		<br />
+		<hr />
+	<% end %>
+<% elsif @customer.contracts.empty? %>
+	<p>
+		<strong>No contracts currently assigned to customer.</strong><br />
+		<strong>You can add contracts here: <%= link_to 'Add New Contract for Customer', new_customer_contract_path(@customer) %></strong>
+	</p>
+	<br />
+	<hr />
+<% end %>
+
+<%= link_to 'Home', "/" %> | 
+<%= link_to 'Manage Customers', customers_path %>
